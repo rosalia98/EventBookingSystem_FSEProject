@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "EventBookingSystem_FSEProject"
