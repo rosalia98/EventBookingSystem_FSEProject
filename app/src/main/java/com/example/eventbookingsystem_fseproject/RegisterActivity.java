@@ -157,28 +157,28 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                final UserClient userclient = new UserClient(prenume, nume, email, telefon, adresa);
+                                final User userclient = new User(prenume, nume, email, telefon, adresa);
 
-                                firestore.collection("Clients").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                firestore.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .set(userclient)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
 
-                                                Toast.makeText(URegisterActivity.this,
+                                                Toast.makeText(RegisterActivity.this,
                                                         "Contul a fost creat!", Toast.LENGTH_LONG).show();
 
                                                 progressBar.setVisibility(View.GONE);
 
-                                                // apoi userul este logat si redirectionat catre calibrarea adresei cu maps
+                                                // apoi userul este logat si redirectionat catre MAIN
 
-                                                Bundle b = new Bundle();
+                                               /* Bundle b = new Bundle();
 
                                                 b.putString("user_address",adresa);
-                                                b.putString("user_name",prenume+" "+nume);
+                                                b.putString("user_name",prenume+" "+nume);*/
 
-                                                Intent intent = new Intent(v.getContext(), UCalibreazaAdresa.class);
-                                                intent.putExtras(b);
+                                                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                                                /*intent.putExtras(b);*/
                                                 startActivity(intent);
 
                                             }
@@ -186,7 +186,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(URegisterActivity.this,
+                                                Toast.makeText(RegisterActivity.this,
                                                         "Eroare! Reîncearcă", Toast.LENGTH_LONG).show();
                                             }
                                         });

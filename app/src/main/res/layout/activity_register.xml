@@ -22,7 +22,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/user_profile_pic" />
+            app:srcCompat="@drawable/ic_launcher_background" />
 
         <EditText
             android:id="@+id/textEmail"
@@ -193,7 +193,7 @@
             android:backgroundTint="@color/colorPrimary"
             android:fontFamily="@font/lato"
             android:includeFontPadding="false"
-            android:text="@string/button_register_cont"
+            android:text="INREGISTRARE"
             android:textColor="@color/colorBackground"
             android:textSize="18sp" />
 

@@ -33,6 +33,8 @@
                 android:value="com.example.eventbookingsystem_fseproject.LoginActivity" />
         </activity>
 
+        <activity android:name=".MainActivity" />
+
     </application>
 
 </manifest>
