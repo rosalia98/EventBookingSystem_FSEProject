@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "814609553931",
+    "project_id": "eventbookingsystem-fseproject",
+    "storage_bucket": "eventbookingsystem-fseproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814609553931:android:131788f1c7ae7605af050e",
+        "android_client_info": {
+          "package_name": "com.example.eventbookingsystem_fseproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814609553931-vrvqmgsl5c9d8iikouc5bqpqltjihl8k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqvgVYTIkZ6-LJYHKMelw9tw2Tydo-Oxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "814609553931-vrvqmgsl5c9d8iikouc5bqpqltjihl8k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
