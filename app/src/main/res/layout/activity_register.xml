@@ -5,14 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="false"
-    android:background="@color/colorBackgroundLighter"
-    android:theme="@style/Theme.Design.NoActionBar" >
+    android:theme="@style/Theme.Design.NoActionBar">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="false"
-        android:background="@color/colorBackgroundLighter"
         android:theme="@style/Theme.Design.NoActionBar">
 
         <ImageView
@@ -22,7 +20,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/ic_baseline_person_24" />
 
         <EditText
             android:id="@+id/textEmail"
@@ -41,7 +39,7 @@
             android:hint="E-mail"
             android:inputType="textEmailAddress"
             android:paddingHorizontal="5dp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/black"
             android:textColorHint="@android:color/darker_gray"
             android:visibility="visible" />
 
@@ -61,7 +59,7 @@
             android:hint="Parola"
             android:inputType="textPassword"
             android:paddingHorizontal="5dp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/black"
             android:textColorHint="@android:color/darker_gray"
             android:visibility="visible" />
 
@@ -81,7 +79,7 @@
             android:hint="Repeta parola"
             android:inputType="textPassword"
             android:paddingHorizontal="5dp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/black"
             android:textColorHint="@android:color/darker_gray"
             android:visibility="visible" />
 
@@ -100,7 +98,7 @@
             android:hint="Prenume"
             android:inputType="textPersonName|textCapWords"
             android:paddingHorizontal="5dp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/black"
             android:textColorHint="@android:color/darker_gray"
             android:visibility="visible" />
 
@@ -121,7 +119,7 @@
             android:hint="Nume"
             android:inputType="textPersonName|textCapWords"
             android:paddingHorizontal="5dp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/black"
             android:textColorHint="@android:color/darker_gray"
             android:visibility="visible" />
 
@@ -141,7 +139,7 @@
             android:hint="Telefon"
             android:inputType="phone"
             android:paddingHorizontal="5dp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/black"
             android:textColorHint="@android:color/darker_gray"
             android:visibility="visible" />
 
@@ -161,7 +159,7 @@
             android:hint="Adresa"
             android:inputType="text"
             android:paddingHorizontal="5dp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/black"
             android:textColorHint="@android:color/darker_gray"
             android:visibility="visible" />
 

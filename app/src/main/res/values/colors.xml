@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#E2574C</color>
-    <color name="colorPrimaryDark">#993932</color>
-    <color name="colorPrimaryLight">#e3645b</color>
-    <color name="colorAccent">#001427</color>
-    <color name="colorTertiary">#708D81</color>
+    <!--<color name="colorPrimary">#219EBC</color>-->
+    <color name="colorPrimary">#023047</color>
+    <color name="colorPrimaryLight">#219EBC</color>
+    <color name="colorPrimaryLighter">#8ECAE6</color>
+    <color name="colorAccent">#ea4949</color>
+    <color name="colorTertiary">#FFB703</color>
+
+    <color name="colorAccent_VECHI">#FB8500</color>
+
+
     <color name="colorBackground">#EFEFD0</color>
     <color name="colorBackgroundLighter">#f0f0df</color>
+    <color name="colorText">#5b5b5b</color>
 </resources>
