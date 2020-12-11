@@ -1,8 +1,8 @@
 package com.example.eventbookingsystem_fseproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,17 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.w3c.dom.Document;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,6 +27,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
+
+    // pt auto login
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +51,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_register.setOnClickListener(this);
 
         progressBar = findViewById(R.id.progressBar);
+
+        // Pentru auto login
+
+        // pun email gol ca sa fie ceva in el sa nu fie null ( altfel eroare )
+        preferences = getSharedPreferences("auto_login", MODE_PRIVATE);
+        editor = preferences.edit();
+
+        try {
+            if (preferences.getString("remember", "").equals("true")) {
+
+                String pref_email = preferences.getString("email", "");
+                String pref_password = preferences.getString("password", "");
+                mAuth.signInWithEmailAndPassword(pref_email, pref_password);
+
+                Toast.makeText(this, "Autentificat automat cu: " + pref_email, Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Userul nu are date de autentificare salvate");
+
+        }
+
 
         getSupportActionBar().hide();
 
@@ -78,8 +101,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void userLogin() {
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
+        final String password = editTextPassword.getText().toString().trim();
 
         if (email.isEmpty()) {
             editTextEmail.setError("Completează e-mail!");
@@ -101,9 +124,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 if (task.isSuccessful()) {
 
+                    // Pentru auto login
+
+                    // preferences = getSharedPreferences("auto_login", MODE_PRIVATE);
+                    //editor = preferences.edit();
+                    editor.putString("remember", "true");
+                    editor.putString("email", email);
+                    editor.putString("password", password);
+                    editor.apply();
+
                     final String user_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                    Intent intent = new Intent(LoginActivity.this,  MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     /*intent.putExtras(b);*/
                     startActivity(intent);
 
@@ -113,8 +145,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     toast.show();
                 }
 
-            }
-        });
+                }
+                                                                                }
+
+        );
 
     }
 }

@@ -1,0 +1,15 @@
+https://www.baeldung.com/java-gregorian-calendar
+
+1) Reparat Event.java
+
+2) Adaugat button de logout
+https://stackoverflow.com/questions/6495898/findviewbyid-in-fragment
+
+3) Pastrez Useru logat
+https://stackoverflow.com/questions/9370293/add-a-remember-me-checkbox
+
+La prima accesare a pagini login, dupa apasarea butonului de login se salveaza in fila SharedPreferences emailul si parola userului. Apoi, cand userul intra iar pe pagina login, se verifica daca exista deja in SharedPreferences emailul si parola sa.
+
+In HomeFragment exista temporar un buton de logout. Cand userul il apasa se sterg emailul si parola sa din saved preferences.
+
+Nota: Pe viitor e bine de implementat encriptia parolei, ca sa nu se salveze plain text in SharedPreferences ( desi doar utilizatorul folosind rooted phone o poate vedea acolo ).
