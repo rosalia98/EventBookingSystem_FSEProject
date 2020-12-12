@@ -33,13 +33,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
 
-        Event e1 = new Event("Concert Smiley", "Smiley rupe din nou trendingu si ne " +
-                "canta noul sau album de succes", 2020, 2, 5, 19, 30, 44.4355, 26.0952);
+        Event e1 = new Event("Concert Smiley", "Concert", "Smiley rupe din nou trendingu si ne " +
+                "canta noul sau album de succes", 2020, 2, 5, 19,
+                30, 44.4355, 26.0952, 3);
 
         System.out.println("DEBUG_HOME " + e1.getName());
         System.out.println("DEBUG_HOME " + e1.getDescription());
 
         e1.printDate();
+
+        e1.setPriceCategory(1, "A", 150, 8);
+        e1.setPriceCategory(2, "B", 100, 10);
+        e1.setPriceCategory(3, "C", 70, 14);
+
+        e1.printAllSeats();
+        System.out.println(e1.getTotalSeats());
+
 
         return root;
     }

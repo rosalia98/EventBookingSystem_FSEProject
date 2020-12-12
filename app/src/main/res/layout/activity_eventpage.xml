@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_gravity="clip_horizontal|center_horizontal|fill_horizontal"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="clip_horizontal|center_horizontal|fill_horizontal"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/text_titlu"
-                android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="51dp"
-                android:ems="10"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
                 android:fontFamily="@font/lato_bold"
                 android:gravity="center_horizontal"
                 android:inputType="textPersonName"
@@ -28,22 +27,22 @@
                 android:textColor="@color/colorText"
                 android:textSize="30sp" />
 
-            <ImageView
-                android:id="@+id/event_image"
-                android:layout_width="match_parent"
-                android:layout_height="315dp"
-                android:layout_below="@+id/text_titlu"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="30dp"
-                app:srcCompat="@color/colorAccent" />
+        <ImageView
+            android:id="@+id/image_event_poster"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_below="@+id/text_title"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="30dp"
+            app:srcCompat="@color/colorAccent" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/text_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/lato"
                 android:gravity="center"
                 android:text="Data Event"
@@ -51,12 +50,12 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/text_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/lato"
                 android:gravity="center_horizontal"
                 android:text="O super descriere"
@@ -64,7 +63,7 @@
                 android:textSize="18sp" />
 
             <Button
-                android:id="@+id/buttonRegister3"
+                android:id="@+id/button_cumpara_bilet"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_below="@+id/buttonLogin"
