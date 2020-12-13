@@ -13,4 +13,6 @@
     <color name="colorBackground">#EFEFD0</color>
     <color name="colorBackgroundLighter">#f0f0df</color>
     <color name="colorText">#5b5b5b</color>
+
+    <color name="colorMediumGreen">#22a322</color>
 </resources>
