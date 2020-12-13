@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_login.setOnClickListener(this);
         button_register.setOnClickListener(this);
 
+
         progressBar = findViewById(R.id.progressBar);
 
         // Pentru auto login

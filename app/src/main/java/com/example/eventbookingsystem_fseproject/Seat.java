@@ -1,25 +1,42 @@
+package com.example.eventbookingsystem_fseproject;
+
 public class Seat {
+
+    // Owner_id se va modifica atunci cand userul finalizeaza plata pt un seat...
+    // .. seat-ul va deveni is_available=false si owner_id va lua id user din firebase.
+    private String owner_id;
     private String name;
-    private float price;
+    private double price;
     private boolean is_available;
 
-    //SETTERS
-    public Seat(boolean is_available) {
-        this.name = name;
+
+    public Seat(double price) {
+
         this.price = price;
-        this.is_available = is_available;
+        this.is_available = true;
     }
 
-    //GETTERS
-    public String getname() {
+    public String getName() {
         return name;
     }
 
-    public float getPrice() {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
         return price;
     }
 
-    public boolean getIs_available() {
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public void setAvailability(boolean isAvailable) {
+        this.is_available = isAvailable;
+    }
+
+    public boolean isAvailable() {
         return is_available;
     }
 }
