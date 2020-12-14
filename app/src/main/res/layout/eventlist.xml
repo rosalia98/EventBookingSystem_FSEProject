@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/eventlist_custom1"
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="text"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/evlist_image"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/poster" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="text"
+            android:backgroundTint="@color/colorText"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/evlist_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
+                android:fontFamily="@font/lato"
+                android:gravity="center_horizontal"
+                android:text="Data Evenimentului"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/evlist_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lato_bold"
+                android:gravity="center_horizontal"
+                android:text="Titlu eveniment"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/evlist_location"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
+                android:layout_marginTop="10dp"
+                android:background="#92F686"
+                android:fontFamily="@font/lato"
+                android:gravity="center_horizontal"
+                android:text="Locatie: Placeholder Map"
+                android:textAlignment="center"
+                android:textColor="@color/colorText" />
+
+            <TextView
+                android:id="@+id/evlist_seats_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/lato"
+                android:gravity="center_horizontal"
+                android:text="Bilete ramase"
+                android:textAlignment="center"
+                android:textColor="@color/colorMediumGreen" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

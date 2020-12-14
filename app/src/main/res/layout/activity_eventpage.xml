@@ -15,17 +15,17 @@
         <TextView
             android:id="@+id/text_title"
             android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
             android:ems="10"
-                android:fontFamily="@font/lato_bold"
-                android:gravity="center_horizontal"
-                android:inputType="textPersonName"
-                android:text="Nume Eveniment"
-                android:textColor="@color/colorText"
-                android:textSize="30sp" />
+            android:fontFamily="@font/lato_bold"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"
+            android:text="Nume Eveniment"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/image_event_poster"

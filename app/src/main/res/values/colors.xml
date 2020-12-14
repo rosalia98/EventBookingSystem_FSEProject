@@ -14,5 +14,7 @@
     <color name="colorBackgroundLighter">#f0f0df</color>
     <color name="colorText">#5b5b5b</color>
 
+    <color name="colorEventList">#f5f5f5</color>
+
     <color name="colorMediumGreen">#22a322</color>
 </resources>
