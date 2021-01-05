@@ -2,7 +2,14 @@
 This project is developed as part of the Fundamentals of Software Engineering(FSE) course.<br />
 It is a mobile application that facilitates booking and payment for all kind of events, from 
 concerts to book releases. It can be used by almost all (>95%) Android users.
-For more details regarding this project, check the "Our Team" wiki page! <br />
+Our team members are:
+1. Rădulescu Alexandru - Vlad - project manager & developer
+2. Manea Antonela - designer
+3. Moraru Adrian - Florin
+4. De Martino Rosalia - Maria - developer
+
+Description of project:
+The goal of this application is to simplify the ticket purchase procedure for events by providing a free, easy-to-use booking system that displays events as a list, shows starting price of admission and gives the option of seat selection for supported <br />
 - - - 
 **Methodology chosen:** <br />
 We opted for the Waterfall methodology which is a linear project management approach that breaks down the activities 
