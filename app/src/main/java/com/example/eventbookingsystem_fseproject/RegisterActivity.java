@@ -25,10 +25,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.Serializable;
 
-
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, Serializable {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editEmail, editParola, editRepParola, editPrenume, editNume,
             editTelefon, editAdresa;

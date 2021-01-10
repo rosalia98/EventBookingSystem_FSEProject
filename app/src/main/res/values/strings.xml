@@ -8,4 +8,10 @@
         <item>București</item>
     </string-array>
 
+    <string-array name="categorii">
+        <item>Concert</item>
+        <item>Cinema</item>
+        <item>Teatru</item>
+    </string-array>
+
 </resources>

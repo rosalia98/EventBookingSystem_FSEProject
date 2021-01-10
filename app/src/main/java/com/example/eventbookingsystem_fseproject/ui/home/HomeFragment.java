@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.eventbookingsystem_fseproject.Event;
 import com.example.eventbookingsystem_fseproject.LoginActivity;
 import com.example.eventbookingsystem_fseproject.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +32,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
 
-        Event e1 = new Event("Concert Smiley", "Concert", "Smiley rupe din nou trendingu si ne " +
+/*        Event e1 = new Event("Concert Smiley", "Concert", "Smiley rupe din nou trendingu si ne " +
                 "canta noul sau album de succes", 2020, 2, 5, 19,
                 30, 44.4355, 26.0952, 3);
 
@@ -47,7 +46,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         e1.setPriceCategory(3, "C", 70, 14);
 
         e1.printAllSeats();
-        System.out.println(e1.getTotalSeats());
+        System.out.println(e1.getTotalSeats());*/
 
 
         return root;

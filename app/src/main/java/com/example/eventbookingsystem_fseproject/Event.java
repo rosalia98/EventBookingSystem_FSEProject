@@ -13,9 +13,9 @@ import static java.util.Calendar.DAY_OF_WEEK;
 public class Event {
 //TODO: Adauga variablia pt imaginea evenimentului conform imaginilor stocate in DB.
 
-    Calendar cal;
-    private String name;
     private final String day_name;
+    private String name;
+
     private String description;
     private String genre;
     private GeoPoint location;
@@ -24,6 +24,11 @@ public class Event {
     private ArrayList<Seat> lSeat;
     private int total_seats;
     private int available_seats;
+    private Calendar cal;
+    private int year;
+    private int month;
+    private int day;
+
 
     public Event(String name, String genre, String description, int year, int month, int day,
                  int hourOfDay, int minute, double latitude, double longitude, int nr_price_categories) {
@@ -31,12 +36,17 @@ public class Event {
         this.name = name;
         this.description = description;
         this.genre = genre;
+        this.year = year;
+        this.month = month;
+        this.day = day;
 
         this.cal = new GregorianCalendar(year, month, day, hourOfDay, minute);
         this.cal.setTimeZone(TimeZone.getTimeZone("Romania"));
 
+
         String[] weekdays = new DateFormatSymbols().getWeekdays(); // Get day names
         this.day_name = weekdays[cal.get(DAY_OF_WEEK)];
+
 
         this.location = new GeoPoint(latitude, longitude);
 
@@ -102,6 +112,57 @@ public class Event {
         this.description = description;
     }
 
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public int getTotal_seats() {
+        return total_seats;
+    }
+
+    public void setTotal_seats(int total_seats) {
+        this.total_seats = total_seats;
+    }
+
+    public int getAvailable_seats() {
+        return available_seats;
+    }
+
+    public void setAvailable_seats(int available_seats) {
+        this.available_seats = available_seats;
+    }
+
+    public String getDay_name() {
+        return day_name;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
 
     public void printDate() {
 
@@ -124,6 +185,7 @@ public class Event {
 
 
     }
+
 
     public void autoSeatSelect(String selected_category_name, int nr_seats) {
 

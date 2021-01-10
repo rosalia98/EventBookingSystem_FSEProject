@@ -11,7 +11,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="text"
         android:orientation="horizontal">
 
         <ImageButton
@@ -26,20 +25,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="text"
             android:backgroundTint="@color/colorText"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/evlist_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
-                android:fontFamily="@font/lato"
-                android:gravity="center_horizontal"
-                android:text="Data Evenimentului"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/evlist_title"
@@ -55,15 +42,25 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/evlist_location"
+                android:id="@+id/evlist_date"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
-                android:layout_marginTop="10dp"
-                android:background="#92F686"
                 android:fontFamily="@font/lato"
                 android:gravity="center_horizontal"
-                android:text="Locatie: Placeholder Map"
+                android:text="Data Evenimentului"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/evlist_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/lato"
+                android:gravity="center_horizontal"
+                android:text="Locatie"
                 android:textAlignment="center"
                 android:textColor="@color/colorText" />
 
@@ -78,6 +75,7 @@
                 android:text="Bilete ramase"
                 android:textAlignment="center"
                 android:textColor="@color/colorMediumGreen" />
+
         </LinearLayout>
     </LinearLayout>
 
