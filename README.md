@@ -5,7 +5,7 @@ concerts to book releases. It can be used by almost all (>95%) Android users.
 Our team members are:
 1. Rădulescu Alexandru - Vlad - project manager & developer
 2. Manea Antonela - designer
-3. Moraru Adrian - Florin
+3. Moraru Adrian - Florin - tester
 4. De Martino Rosalia - Maria - developer
 
 Description of project:
