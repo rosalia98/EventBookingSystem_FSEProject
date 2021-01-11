@@ -34,6 +34,8 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
     StorageReference storageRef;
     StorageReference photosFolder;
 
+    Uri image_uri;
+
 
     // CONSTRUCTOR PENTRU CAND NU VREI NEAPARAT SA FOLOSESTI SI CLICKUL PT RECYCLERVIEW
     public EventListAdapter(Context mContext, List<Event> mEventList) {
@@ -71,6 +73,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
 
         // Vreau sa afisez doar o parte din descriere/adresa in lista.
         String descriere_org = mEventList.get(position).getDescription();
+        holder.tv_descriere.setText(mEventList.get(position).getDescription());
 
         if (descriere_org.length() > 90) {
             descriere_org = descriere_org.substring(0, 90) + "...";
@@ -88,7 +91,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
 
 
         holder.tv_categorie.setText(mEventList.get(position).getGenre());
-        holder.tv_data.setText(mEventList.get(position).getData_string());
+        holder.tv_date.setText(mEventList.get(position).getData_string());
         holder.tv_time.setText(mEventList.get(position).getTime_string());
 
 
@@ -100,6 +103,8 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
         pozaRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
+
+                image_uri = uri;
 
                 Glide.with(mContext)
                         .load(uri)
@@ -116,6 +121,11 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
 
                 Intent intent = new Intent(view.getContext(), EventPageActivity.class);
                 intent.putExtra("ev_title", holder.tv_titlu.getText().toString());
+                intent.putExtra("ev_description", holder.tv_descriere.getText().toString());
+                intent.putExtra("ev_date", holder.tv_date.getText().toString());
+                intent.putExtra("ev_time", holder.tv_time.getText().toString());
+
+
                 view.getContext().startActivity(intent);
             }
         });
@@ -140,7 +150,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
         private final TextView tv_descriere;
         private final TextView tv_categorie;
         private final TextView tv_locatie;
-        private final TextView tv_data;
+        private final TextView tv_date;
         private final TextView tv_time;
         private final ImageView iv_poza;
 
@@ -156,7 +166,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
             tv_descriere = itemView.findViewById(R.id.evlist_description);
             tv_categorie = itemView.findViewById(R.id.evlist_genre);
             tv_locatie = itemView.findViewById(R.id.evlist_location);
-            tv_data = itemView.findViewById(R.id.evlist_date);
+            tv_date = itemView.findViewById(R.id.evlist_date);
             tv_time = itemView.findViewById(R.id.evlist_time);
             iv_poza = itemView.findViewById(R.id.evlist_image);
 

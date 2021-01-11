@@ -39,7 +39,7 @@
             app:srcCompat="@color/colorAccent" />
 
             <TextView
-                android:id="@+id/ep_data"
+                android:id="@+id/ep_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -50,18 +50,30 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/text_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/lato"
-                android:gravity="center_horizontal"
-                android:text="O super descriere"
-                android:textColor="@color/colorText"
-                android:textSize="18sp" />
+        <TextView
+            android:id="@+id/ep_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="Data Event"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/ep_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/lato"
+            android:gravity="center_horizontal"
+            android:text="O super descriere"
+            android:textColor="@color/colorText"
+            android:textSize="18sp" />
 
             <Button
                 android:id="@+id/button_cumpara_bilet"

@@ -114,7 +114,7 @@
             <TextView
                 android:id="@+id/evlist_description"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="10dp"
                 android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
                 android:fontFamily="@font/lato_thin"
                 android:gravity="center_horizontal"
