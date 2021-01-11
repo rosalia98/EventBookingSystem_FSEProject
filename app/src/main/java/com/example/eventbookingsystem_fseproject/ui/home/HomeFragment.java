@@ -8,20 +8,39 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.eventbookingsystem_fseproject.Event;
 import com.example.eventbookingsystem_fseproject.LoginActivity;
 import com.example.eventbookingsystem_fseproject.R;
+import com.example.eventbookingsystem_fseproject.adapters.EventListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
+    //Variables
     private HomeViewModel homeViewModel;
+
+    private FirebaseFirestore firestore;
+    private ArrayList<Event> lEveniment = new ArrayList<>();
+
+    //UI
+    private RecyclerView recyclerEvenimente;
     private Button btn_logout;
 
 
@@ -32,21 +51,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
 
-/*        Event e1 = new Event("Concert Smiley", "Concert", "Smiley rupe din nou trendingu si ne " +
-                "canta noul sau album de succes", 2020, 2, 5, 19,
-                30, 44.4355, 26.0952, 3);
 
-        System.out.println("DEBUG_HOME " + e1.getName());
-        System.out.println("DEBUG_HOME " + e1.getDescription());
-
-        e1.printDate();
-
-        e1.setPriceCategory(1, "A", 150, 8);
-        e1.setPriceCategory(2, "B", 100, 10);
-        e1.setPriceCategory(3, "C", 70, 14);
-
-        e1.printAllSeats();
-        System.out.println(e1.getTotalSeats());*/
 
 
         return root;
@@ -57,9 +62,55 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         btn_logout = getView().findViewById(R.id.button_logout);
         btn_logout.setOnClickListener(this);
 
-
+        firestore = FirebaseFirestore.getInstance();
+        recyclerEvenimente = getView().findViewById(R.id.recyclerEvenimente);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Folosesc acest listener care asculta cand se schimba ceva in cereri.
+        // Cum se schimba ceva, lCerere este actualizat.
+
+        firestore.collection("Events").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                if (error != null) {
+                    //Log.w(TAG, "Listen failed.", error);
+                    Toast.makeText(getActivity(), "Listen failed.",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                lEveniment = new ArrayList<>();
+
+                for (QueryDocumentSnapshot doc : value) {
+                    if (doc.get("id") != null) {
+
+                        // System.out.println("DEBUG Listener DB.............." + doc.get("cerere_id"));
+
+                        Event e1 = new Event();
+                        e1 = doc.toObject(Event.class);
+                        lEveniment.add(e1);
+
+                        System.out.println("DEBUG..... HomeFragment....e1 title.." + e1.getTitle());
+
+
+                    }
+                }
+
+
+                EventListAdapter recyclerAdapter = new EventListAdapter(getContext(), lEveniment);
+                recyclerEvenimente.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerEvenimente.setAdapter(recyclerAdapter);
+
+            }
+        });
+
+
+    }
 
     @Override
     public void onClick(View view) {

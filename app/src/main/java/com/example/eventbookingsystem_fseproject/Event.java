@@ -13,32 +13,49 @@ import static java.util.Calendar.DAY_OF_WEEK;
 public class Event {
 //TODO: Adauga variablia pt imaginea evenimentului conform imaginilor stocate in DB.
 
-    private final String day_name;
-    private String name;
 
+    private final String day_name;
+    private String id;
     private String description;
     private String genre;
+    private String title;
     private GeoPoint location;
     private int price_categories;
+    private String location_string;
     // lSeat = list of seats
     private ArrayList<Seat> lSeat;
     private int total_seats;
     private int available_seats;
     private Calendar cal;
+
     private int year;
     private int month;
     private int day;
+    private int hourofDay;
+    private int minute;
 
+    private String photoStoragePath;
 
-    public Event(String name, String genre, String description, int year, int month, int day,
+    public Event() {
+
+        this.cal = new GregorianCalendar();
+        this.cal.setTimeZone(TimeZone.getTimeZone("Romania"));
+        String[] weekdays = new DateFormatSymbols().getWeekdays(); // Get day names
+        this.day_name = weekdays[cal.get(DAY_OF_WEEK)];
+    }
+
+    public Event(String title, String genre, String description, String location_string, int year, int month, int day,
                  int hourOfDay, int minute, double latitude, double longitude, int nr_price_categories) {
 
-        this.name = name;
+        this.title = title;
         this.description = description;
+        this.location_string = location_string;
         this.genre = genre;
         this.year = year;
         this.month = month;
         this.day = day;
+        this.hourofDay = hourOfDay;
+        this.minute = minute;
 
         this.cal = new GregorianCalendar(year, month, day, hourOfDay, minute);
         this.cal.setTimeZone(TimeZone.getTimeZone("Romania"));
@@ -96,12 +113,12 @@ public class Event {
 
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -164,6 +181,46 @@ public class Event {
         this.day = day;
     }
 
+    public String getLocation_string() {
+        return location_string;
+    }
+
+    public void setLocation_string(String location_string) {
+        this.location_string = location_string;
+    }
+
+    public int getHourofDay() {
+        return hourofDay;
+    }
+
+    public void setHourofDay(int hourofDay) {
+        this.hourofDay = hourofDay;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getPhotoStoragePath() {
+        return photoStoragePath;
+    }
+
+    public void setPhotoStoragePath(String photoStoragePath) {
+        this.photoStoragePath = photoStoragePath;
+    }
+
     public void printDate() {
 
         String month_name = "error";
@@ -184,6 +241,86 @@ public class Event {
                 + ":" + cal.get(Calendar.MINUTE));
 
 
+    }
+
+    public String getData_string() {
+
+        String ziua_str = "eroare", luna_str = "eroare";
+
+        switch (day_name) {
+            case "Monday":
+                ziua_str = "luni";
+                break;
+            case "Tuesday":
+                ziua_str = "marți";
+                break;
+            case "Wednesday":
+                ziua_str = "miercuri";
+                break;
+            case "Thursday":
+                ziua_str = "joi";
+                break;
+            case "Friday":
+                ziua_str = "vineri";
+                break;
+            case "Saturday":
+                ziua_str = "sâmbătă";
+                break;
+            case "Sunday":
+                ziua_str = "duminică";
+                break;
+
+        }
+
+        switch (month) {
+            case 1:
+                luna_str = "ianuarie";
+                break;
+            case 2:
+                luna_str = "februarie";
+                break;
+            case 3:
+                luna_str = "martie";
+                break;
+            case 4:
+                luna_str = "aprilie";
+                break;
+            case 5:
+                luna_str = "mai";
+                break;
+            case 6:
+                luna_str = "iunie";
+                break;
+            case 7:
+                luna_str = "iulie";
+                break;
+            case 8:
+                luna_str = "august";
+                break;
+            case 9:
+                luna_str = "septembrie";
+                break;
+            case 10:
+                luna_str = "octombrie";
+                break;
+            case 11:
+                luna_str = "noiembrie";
+                break;
+            case 12:
+                luna_str = "decembrie";
+                break;
+        }
+
+
+        return ziua_str + " " + day + " " + luna_str;
+    }
+
+    public String getTime_string() {
+        if (minute == 0) {
+            return hourofDay + ":" + minute + "0";
+
+        }
+        return hourofDay + ":" + minute;
     }
 
 

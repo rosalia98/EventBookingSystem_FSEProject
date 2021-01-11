@@ -2,6 +2,7 @@ package com.example.eventbookingsystem_fseproject.ui.add_event;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -52,28 +54,31 @@ import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 // era extends Fragment inainte sa fie DialogFragment
-public class AddEventFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+public class AddEventFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener,
+        TimePickerDialog.OnTimeSetListener {
 
     //CONSTANTS
 
     // valoarea se da random
     private static final int WRITE_REQUEST_CODE = 8778;
+
+    //Variables
     private final String user_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    //Varibles for Event object constructor
+    private String ev_id, ev_titlu, ev_descriere, ev_locatie, ev_categorie, ev_data, ev_timp;
+    private int ev_zi, ev_luna, ev_an, ev_ora, ev_minut;
     private final ArrayList<ImageView> lPoze = new ArrayList<>();
     //Variables
     private FirebaseFirestore firestore;
     private DocumentReference mUser;
-    private String eveniment_categorie, adresa_string;
+    private String adresa_string;
     private StorageReference mStorageRef;
-    private StorageReference mUserStorageRef;
 
     //UI
-    private EditText editTitlu, editDescriere, editData, editTimp;
-    private Button buttonPickDate;
-    private Button buttonPickTime;
-    private Button buttonAddEvent;
+    private EditText editTitlu, editDescriere, editData, editTimp, editLocatie, editPriceRange;
+    private Button buttonPickDate, buttonPickTime, buttonAddEvent, buttonPriceRangeEv;
 
-    private LinearLayout layoutFotografii;
+    private LinearLayout layoutFotografii, layoutInstancePriceRange;
     private ImageView imageAdd;
     private NotificationsViewModel notificationsViewModel;
 
@@ -110,8 +115,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             }
         });*/
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
-        mUserStorageRef = mStorageRef.child(user_uid);
+        mStorageRef = FirebaseStorage.getInstance().getReference().child("Events");
 
 
         initializareCampuri();
@@ -196,8 +200,10 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
 
         editTitlu = getView().findViewById(R.id.editTitluEv);
         editDescriere = getView().findViewById(R.id.editDescriereEv);
+        editLocatie = getView().findViewById(R.id.editLocatieEv);
         editData = getView().findViewById(R.id.editDataEv);
         editTimp = getView().findViewById(R.id.editTimeEv);
+        editPriceRange = getView().findViewById(R.id.editPriceRangeEv);
 
         final Spinner spinner_domeniu = getView().findViewById(R.id.spinnerDomeniuEv);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -216,18 +222,19 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
                 // pentru design
                 ((TextView) spinner_domeniu.getChildAt(0)).setTextSize(18);
 
-                eveniment_categorie = spinner_domeniu.getSelectedItem().toString();
+                ev_categorie = spinner_domeniu.getSelectedItem().toString();
 
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
-                eveniment_categorie = spinner_domeniu.getSelectedItem().toString();
+                ev_categorie = spinner_domeniu.getSelectedItem().toString();
             }
         });
 
         layoutFotografii = getView().findViewById(R.id.FotografiiLayout);
+        layoutInstancePriceRange = getView().findViewById(R.id.InstancePriceRangeLayout);
 
         imageAdd = getView().findViewById(R.id.buttonAddPhotosEv);
         imageAdd.setOnClickListener(this);
@@ -238,6 +245,9 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         buttonPickTime = getView().findViewById(R.id.buttonPickTimeEv);
         buttonPickTime.setOnClickListener(this);
 
+        buttonPriceRangeEv = getView().findViewById(R.id.buttonPriceRangeEv);
+        buttonPriceRangeEv.setOnClickListener(this);
+
         buttonAddEvent = getView().findViewById(R.id.buttonAddEvent);
         buttonAddEvent.setOnClickListener(this);
 
@@ -246,21 +256,45 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
 
     public void incarcaCerere() {
 
-        String titlu = editTitlu.getText().toString().trim();
-        String descriere = editDescriere.getText().toString().trim();
+        ev_titlu = editTitlu.getText().toString().trim();
+        ev_descriere = editDescriere.getText().toString().trim();
+        ev_data = editData.getText().toString();
+        ev_timp = editTimp.getText().toString();
+        ev_locatie = editLocatie.getText().toString();
 
         boolean ok = true;
 
-        if (titlu.length() < 6) {
+        if (ev_titlu.length() < 3) {
             editTitlu.setError("Titlu prea scurt!");
             editTitlu.requestFocus();
             ok = false;
             return;
         }
 
-        if (descriere.length() < 3) {
+        if (ev_descriere.length() < 3) {
             editDescriere.setError("Descriere prea scurtă!");
             editDescriere.requestFocus();
+            ok = false;
+            return;
+        }
+
+        if (ev_data.isEmpty()) {
+            editData.setError("Selecteaza data eveniment!");
+            editData.requestFocus();
+            ok = false;
+            return;
+        }
+
+        if (ev_timp.isEmpty()) {
+            editTimp.setError("Selecteaza ora eveniment!");
+            editTimp.requestFocus();
+            ok = false;
+            return;
+        }
+
+        if (ev_locatie.isEmpty()) {
+            editLocatie.setError("Adauga locatie eveniment!");
+            editLocatie.requestFocus();
             ok = false;
             return;
         }
@@ -273,14 +307,11 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
 
         if (ok) {
 
-            Event e1 = new Event(titlu, eveniment_categorie, descriere, 2020, 2, 5, 19,
-                    30, 44.4355, 26.0952, 3);
+            Event e1 = new Event(ev_titlu, ev_categorie, ev_descriere, ev_locatie, ev_an, ev_luna, ev_zi, ev_ora,
+                    ev_minut, 44.4355, 26.0952, 3);
 
-            // TODO Revizuieste aceste comentarii
-            //  Cerere c1 = new Cerere(user_uid, eveniment_categorie, titlu, descriere, adresa_string);
-
-            //String event_id = user_uid + "_p_" + c1.getDay() + "_" + c1.getMonth() + "_" + c1.getYear();
-            // c1.setCerere_id(event_id);
+            ev_id = ev_titlu.replace(" ", "_") + "_" + ev_locatie.substring(0, 3) + "_" + ev_zi + "_" + ev_luna + "_" + ev_an + "_" + ev_ora + "_" + ev_minut;
+            e1.setId(ev_id);
 
 
             // Salvare imagini in storage
@@ -291,23 +322,20 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 35, baos);
                 byte[] imageInByte = baos.toByteArray();
 
-                //mUserStorageRef.child(event_id).child("img_" + lPoze.indexOf(imgview)).putBytes(imageInByte);
+                mStorageRef.child(ev_id).child("img_" + lPoze.indexOf(imgview)).putBytes(imageInByte);
             }
 
-
-            // c1.setPhotoStoragePath(mUserStorageRef.child(event_id).toString());
+            e1.setPhotoStoragePath(mStorageRef.toString());
 
 
             // Salvare cerere in firebase
-            // In cont client:
-//TODO REVIZUIESTE COMENTARII
-            firestore.collection("Clients").document(user_uid)
-                    //.collection("Cereri").document(event_id)
+            // In Events:
+            firestore.collection("Events").document(ev_id)
                     .set(e1)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast toast = Toast.makeText(getContext(), "Cererea a fost plasată!", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(getContext(), "Evenimentul a fost adaugat!", Toast.LENGTH_SHORT);
                             toast.show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -318,9 +346,6 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
 
                 }
             });
-
-            //In colectia Cereri
-            //firestore.collection("Cereri").document(event_id).set(e1);
 
 
         }
@@ -451,13 +476,18 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         int startMonth = c.get(Calendar.MONTH) + 1;
         int startDay = c.get(Calendar.DAY_OF_MONTH);
 
-
+        // Pt ca suntem in Fragment (AddEvent) trebuie sa ii facem listener custom, altfel
+        // nu vom sti cand s-a ales data.
+        // Listeneru se face inainte de declararea obiectului listen-uit
         DatePickerDialog.OnDateSetListener dateListener;
 
         dateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 editData.setText(dayOfMonth + "." + monthOfYear + "." + year);
+                ev_an = year;
+                ev_luna = monthOfYear;
+                ev_zi = dayOfMonth;
             }
         };
 
@@ -465,7 +495,34 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
                 new DatePickerDialog(getActivity(), dateListener, startYear, startMonth, startDay);
 
         datePickerDialog.show();
+    }
 
+    public void alegeTimp() {
+
+        // Use the current time as the default values for the picker
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+
+        TimePickerDialog.OnTimeSetListener timeListener;
+
+        timeListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                editTimp.setText(hour + ":" + minute);
+                ev_ora = hour;
+                ev_minut = minute;
+
+            }
+        };
+
+
+        TimePickerDialog timePickerDialog =
+                new TimePickerDialog(getContext(), timeListener, hour, minute, true);
+        timePickerDialog.show();
+    }
+
+    public void alegePriceRange() {
 
     }
 
@@ -476,7 +533,14 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
 
             case R.id.buttonPickDateEv:
                 alegeData();
+                break;
 
+            case R.id.buttonPickTimeEv:
+                alegeTimp();
+                break;
+
+            case R.id.buttonPriceRangeEv:
+                //   alegePriceRange();
                 break;
 
             case R.id.buttonAddPhotosEv:
@@ -493,9 +557,9 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-
-
     }
 
-
+    @Override
+    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+    }
 }

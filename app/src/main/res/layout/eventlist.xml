@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/evlist_LinearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="5dp"
+    android:layout_marginVertical="3dp"
     android:background="@drawable/eventlist_custom1"
     android:orientation="vertical"
-    android:paddingHorizontal="10dp"
-    android:paddingVertical="10dp">
+    android:paddingHorizontal="0dp"
+    android:paddingVertical="3dp">
 
     <LinearLayout
+        android:id="@+id/evlist_EventInfoLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
@@ -17,14 +20,17 @@
             android:id="@+id/evlist_image"
             android:layout_width="150dp"
             android:layout_height="200dp"
-            android:adjustViewBounds="false"
-            android:cropToPadding="false"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/poster" />
+            android:layout_marginVertical="3dp"
+            android:layout_marginStart="4dp"
+            android:background="#FFFFFF"
+            android:clickable="false"
+            android:scaleType="center" />
 
         <LinearLayout
+            android:id="@+id/TextLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginHorizontal="3dp"
             android:backgroundTint="@color/colorText"
             android:orientation="vertical">
 
@@ -42,27 +48,92 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/evlist_date"
+                android:id="@+id/evlist_genre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
                 android:fontFamily="@font/lato"
                 android:gravity="center_horizontal"
-                android:text="Data Evenimentului"
+                android:text="Titlu eveniment"
+                android:textAlignment="center"
+                android:textColor="@color/colorText"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <LinearLayout
+                android:id="@+id/DataOraLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/evlist_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/lato"
+                    android:gravity="center_horizontal"
+                    android:text="Data Evenimentului"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.01"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/evlist_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
+                    android:layout_weight="0.6"
+                    android:fontFamily="@font/lato"
+                    android:gravity="center_horizontal"
+                    android:text="Ora Evenimentului"
+                    android:textColor="@android:color/black"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/evlist_description"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
+                android:fontFamily="@font/lato_thin"
+                android:gravity="center_horizontal"
+                android:text="Descriere eveniment"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/evlist_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
-                android:layout_marginTop="10dp"
+                android:layout_marginVertical="6dp"
                 android:fontFamily="@font/lato"
                 android:gravity="center_horizontal"
                 android:text="Locatie"
                 android:textAlignment="center"
-                android:textColor="@color/colorText" />
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/evlist_seats_status"
@@ -72,9 +143,10 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/lato"
                 android:gravity="center_horizontal"
-                android:text="Bilete ramase"
+                android:text="Bilete disponibile"
                 android:textAlignment="center"
-                android:textColor="@color/colorMediumGreen" />
+                android:textColor="@color/colorMediumGreen"
+                android:textSize="14sp" />
 
         </LinearLayout>
     </LinearLayout>
