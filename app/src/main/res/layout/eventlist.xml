@@ -124,6 +124,18 @@
                 android:visibility="gone" />
 
             <TextView
+                android:id="@+id/evlist_id"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_gravity="clip_horizontal|center_horizontal|center_vertical"
+                android:fontFamily="@font/lato_thin"
+                android:gravity="center_horizontal"
+                android:text="Descriere eveniment"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <TextView
                 android:id="@+id/evlist_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

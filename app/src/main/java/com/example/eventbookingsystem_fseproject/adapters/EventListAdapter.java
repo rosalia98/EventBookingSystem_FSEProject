@@ -27,6 +27,7 @@ import java.util.List;
 public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyViewHolder> {
 
     //Variables
+    String event_id;
     Context mContext;
     List<Event> mEventList = new ArrayList<>();
     OnItemClickAscultare mAscultor;
@@ -65,6 +66,8 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
 
+        holder.tv_eventId.setText(mEventList.get(position).getId());
+
         holder.tv_titlu.setText(mEventList.get(position).getTitle());
 
         storage = FirebaseStorage.getInstance();
@@ -95,7 +98,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
         holder.tv_time.setText(mEventList.get(position).getTime_string());
 
 
-        String event_id = mEventList.get(position).getId();
+        event_id = mEventList.get(position).getId();
 
         StorageReference pozaRef;
         pozaRef = storageRef.child("Events").child(event_id).child("img_0");
@@ -124,6 +127,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
                 intent.putExtra("ev_description", holder.tv_descriere.getText().toString());
                 intent.putExtra("ev_date", holder.tv_date.getText().toString());
                 intent.putExtra("ev_time", holder.tv_time.getText().toString());
+                intent.putExtra("ev_id", holder.tv_eventId.getText().toString());
 
 
                 view.getContext().startActivity(intent);
@@ -152,6 +156,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
         private final TextView tv_locatie;
         private final TextView tv_date;
         private final TextView tv_time;
+        private final TextView tv_eventId;
         private final ImageView iv_poza;
 
 
@@ -169,6 +174,9 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
             tv_date = itemView.findViewById(R.id.evlist_date);
             tv_time = itemView.findViewById(R.id.evlist_time);
             iv_poza = itemView.findViewById(R.id.evlist_image);
+
+            tv_eventId = itemView.findViewById(R.id.evlist_id);
+
 
         }
 
