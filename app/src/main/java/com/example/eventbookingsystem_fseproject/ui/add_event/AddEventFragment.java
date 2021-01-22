@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,12 +33,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventbookingsystem_fseproject.Event;
+import com.example.eventbookingsystem_fseproject.PriceCategory;
 import com.example.eventbookingsystem_fseproject.R;
+import com.example.eventbookingsystem_fseproject.adapters.PriceCategoryListAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,22 +67,21 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
 
     // valoarea se da random
     private static final int WRITE_REQUEST_CODE = 8778;
-
-    //Variables
     private final String user_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private final ArrayList<ImageView> lPoze = new ArrayList<>();
     //Varibles for Event object constructor
     private String ev_id, ev_titlu, ev_descriere, ev_locatie, ev_categorie, ev_data, ev_timp;
     private int ev_zi, ev_luna, ev_an, ev_ora, ev_minut;
-    private final ArrayList<ImageView> lPoze = new ArrayList<>();
+    private ArrayList<PriceCategory> lEventPriceCategories;
     //Variables
     private FirebaseFirestore firestore;
     private DocumentReference mUser;
     private String adresa_string;
     private StorageReference mStorageRef;
-
     //UI
     private EditText editTitlu, editDescriere, editData, editTimp, editLocatie, editPriceRange;
-    private Button buttonPickDate, buttonPickTime, buttonAddEvent, buttonPriceRangeEv;
+    private Button buttonPickDate, buttonPickTime, buttonAddEvent, buttonAddPriceRange;
+    private RecyclerView recyclerPriceRanges;
 
     private LinearLayout layoutFotografii, layoutInstancePriceRange;
     private ImageView imageAdd;
@@ -203,7 +208,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         editLocatie = getView().findViewById(R.id.editLocatieEv);
         editData = getView().findViewById(R.id.editDataEv);
         editTimp = getView().findViewById(R.id.editTimeEv);
-        editPriceRange = getView().findViewById(R.id.editPriceRangeEv);
+        //editPriceRange = getView().findViewById(R.id.editPriceRangeEv);
 
         final Spinner spinner_domeniu = getView().findViewById(R.id.spinnerDomeniuEv);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -234,7 +239,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         });
 
         layoutFotografii = getView().findViewById(R.id.FotografiiLayout);
-        layoutInstancePriceRange = getView().findViewById(R.id.InstancePriceRangeLayout);
+        //layoutInstancePriceRange = getView().findViewById(R.id.InstancePriceRangeLayout);
 
         imageAdd = getView().findViewById(R.id.buttonAddPhotosEv);
         imageAdd.setOnClickListener(this);
@@ -245,8 +250,12 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         buttonPickTime = getView().findViewById(R.id.buttonPickTimeEv);
         buttonPickTime.setOnClickListener(this);
 
-        buttonPriceRangeEv = getView().findViewById(R.id.buttonPriceRangeEv);
-        buttonPriceRangeEv.setOnClickListener(this);
+        buttonAddPriceRange = getView().findViewById(R.id.buttonPriceRangeEv);
+        buttonAddPriceRange.setOnClickListener(this);
+
+
+        recyclerPriceRanges = getView().findViewById(R.id.recyclerCategoriiPret);
+        lEventPriceCategories = new ArrayList<PriceCategory>();
 
         buttonAddEvent = getView().findViewById(R.id.buttonAddEvent);
         buttonAddEvent.setOnClickListener(this);
@@ -308,7 +317,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         if (ok) {
 
             Event e1 = new Event(ev_titlu, ev_categorie, ev_descriere, ev_locatie, ev_an, ev_luna, ev_zi, ev_ora,
-                    ev_minut, 44.4355, 26.0952, 3);
+                    ev_minut, 44.4355, 26.0952, lEventPriceCategories);
 
             ev_id = ev_titlu.replace(" ", "_") + "_" + ev_locatie.substring(0, 3) + "_" + ev_zi + "_" + ev_luna + "_" + ev_an + "_" + ev_ora + "_" + ev_minut;
             e1.setId(ev_id);
@@ -524,6 +533,73 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
 
     public void alegePriceRange() {
 
+        // se creeaza un dialog in care se pot introduce detallile referitoare la price range
+
+        final Typeface fonttype = ResourcesCompat.getFont(getContext(), R.font.lato);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.seat_category_layout, null);
+
+
+        final TextView tv_nume_categorie = dialogView.findViewById(R.id.editNumeCategorie);
+        tv_nume_categorie.setTypeface(fonttype);
+
+
+        final TextView tv_nr_randuri = dialogView.findViewById(R.id.editNrRanduri);
+        tv_nume_categorie.setTypeface(fonttype);
+
+
+        final TextView tv_nr_locuri_rand = dialogView.findViewById(R.id.editLocuriPeRand);
+        tv_nume_categorie.setTypeface(fonttype);
+
+
+        final TextView tv_pret_loc = dialogView.findViewById(R.id.editPretLoc);
+        tv_nume_categorie.setTypeface(fonttype);
+
+
+        final AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(getContext());
+        mDialogBuilder.setMessage("Adauga categorie de pret")
+                .setView(dialogView)
+
+                .setPositiveButton("Adauga Categorie", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+
+                        if (!tv_nume_categorie.getText().toString().isEmpty() && !tv_nr_randuri.getText().toString().isEmpty()
+                                && !tv_nr_locuri_rand.getText().toString().isEmpty() && !tv_pret_loc.getText().toString().isEmpty()) {
+
+
+                            // Convertesc TextViews-urile in String, int si double
+                            String nume_categorie = tv_nume_categorie.getText().toString();
+                            int nr_randuri = Integer.parseInt(tv_nr_randuri.getText().toString());
+                            int nr_locuri_rand = Integer.parseInt(tv_nr_locuri_rand.getText().toString());
+                            double pret_loc = Double.parseDouble(tv_pret_loc.getText().toString());
+
+                            PriceCategory pc1 = new PriceCategory(nume_categorie, nr_randuri, nr_locuri_rand, pret_loc);
+                            lEventPriceCategories.add(pc1);
+
+                            PriceCategoryListAdapter recyclerAdapter = new PriceCategoryListAdapter(getContext(), lEventPriceCategories);
+                            recyclerPriceRanges.setLayoutManager(new LinearLayoutManager(getContext()));
+                            recyclerPriceRanges.setAdapter(recyclerAdapter);
+
+
+                        } else {
+                            Toast toast = Toast.makeText(getContext(), "Completați toate campurile!", Toast.LENGTH_SHORT);
+                            toast.show();
+
+                        }
+                    }
+                })
+                .setNegativeButton("Anulare", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+
+                });
+
+
+        mDialogBuilder.show();
+
+
     }
 
 
@@ -540,7 +616,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
                 break;
 
             case R.id.buttonPriceRangeEv:
-                //   alegePriceRange();
+                alegePriceRange();
                 break;
 
             case R.id.buttonAddPhotosEv:

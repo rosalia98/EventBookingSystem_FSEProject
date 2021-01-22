@@ -20,10 +20,11 @@ public class Event {
     private String genre;
     private String title;
     private GeoPoint location;
-    private int price_categories;
     private String location_string;
-    // lSeat = list of seats
-    private ArrayList<Seat> lSeat;
+
+    //private ArrayList<Seat> lSeat;
+    private ArrayList<PriceCategory> lPriceCategories;
+
     private int total_seats;
     private int available_seats;
     private Calendar cal;
@@ -45,7 +46,7 @@ public class Event {
     }
 
     public Event(String title, String genre, String description, String location_string, int year, int month, int day,
-                 int hourOfDay, int minute, double latitude, double longitude, int nr_price_categories) {
+                 int hourOfDay, int minute, double latitude, double longitude, ArrayList<PriceCategory> priceCategories) {
 
         this.title = title;
         this.description = description;
@@ -56,6 +57,7 @@ public class Event {
         this.day = day;
         this.hourofDay = hourOfDay;
         this.minute = minute;
+        this.lPriceCategories = priceCategories;
 
         this.cal = new GregorianCalendar(year, month, day, hourOfDay, minute);
         this.cal.setTimeZone(TimeZone.getTimeZone("Romania"));
@@ -66,52 +68,27 @@ public class Event {
 
 
         this.location = new GeoPoint(latitude, longitude);
-
-        this.price_categories = nr_price_categories;
-        lSeat = new ArrayList<Seat>();
+        lPriceCategories = new ArrayList<PriceCategory>();
     }
 
 
-    public void setPriceCategory(int category_nr, String category_name, double seat_price, int nr_seats) throws IndexOutOfBoundsException {
+    public void addPriceCategory(PriceCategory pc1) {
+        lPriceCategories.add(pc1);
 
-        int count = 1;
+    }
 
-        if (category_nr > price_categories) {
-            throw new IndexOutOfBoundsException("Categoria aleasa nu exista pt acest Event!");
-        }
+    public ArrayList<PriceCategory> getlPriceCategories() {
+        return lPriceCategories;
+    }
 
-        while (count <= nr_seats) {
-
-            Seat s1 = new Seat(seat_price);
-            s1.setName(category_name + "_" + count);
-
-            lSeat.add(s1);
-            this.total_seats++;
-
-            count++;
-        }
-
+    public void setlPriceCategories(ArrayList<PriceCategory> lPriceCategories) {
+        this.lPriceCategories = lPriceCategories;
     }
 
     public int getTotalSeats() {
         return total_seats;
     }
 
-    public void printAllSeats() {
-        String status;
-
-        for (Seat s : lSeat) {
-            if (s.isAvailable()) {
-                status = "available";
-            } else {
-                status = "taken";
-            }
-
-            System.out.println(s.getName() + " " + s.getPrice() + " " + status);
-        }
-
-
-    }
 
     public String getTitle() {
         return title;

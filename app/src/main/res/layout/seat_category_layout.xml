@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/SeatCategoryListLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="5dp"
+    android:paddingVertical="5dp">
+
+    <EditText
+        android:id="@+id/editNumeCategorie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:fontFamily="@font/lato_bold"
+        android:foregroundGravity="clip_horizontal"
+        android:hint="nume categorie"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/editNrRanduri"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/lato"
+        android:foregroundGravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:hint="nr. randuri"
+        android:textColor="@android:color/black"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/editLocuriPeRand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/lato"
+        android:foregroundGravity="right"
+        android:gravity="right"
+        android:hint="locuri/rand"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/editPretLoc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/lato_bold"
+        android:foregroundGravity="right"
+        android:gravity="right"
+        android:hint="pret/loc"
+        android:textColor="@color/colorAccent"
+        android:textSize="16dp" />
+</LinearLayout>

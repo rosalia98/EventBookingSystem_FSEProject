@@ -241,48 +241,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/editPriceRangeEv"
-                android:layout_width="0dp"
-                android:layout_height="28dp"
-                android:layout_marginEnd="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/text_custom"
-                android:backgroundTintMode="add"
-                android:fontFamily="@font/lato"
-                android:gravity="center_horizontal|center_vertical"
-                android:hint="Nr categorii"
-                android:inputType="none"
-                android:paddingHorizontal="5dp"
-                android:paddingVertical="4dp"
-                android:textColor="@color/colorAccent"
-                android:textColorHint="@android:color/darker_gray"
-                android:visibility="visible" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCategoriiPret"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/buttonPriceRangeEv"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_centerVertical="false"
-                android:layout_weight="1"
                 android:background="@drawable/button_custom1"
                 android:backgroundTint="@color/colorPrimary"
                 android:fontFamily="@font/lato"
                 android:gravity="center_horizontal|center_vertical"
                 android:includeFontPadding="false"
-                android:text="Selecteaza"
+                android:text="ADAUGA CATEGORIE"
                 android:textAlignment="gravity"
                 android:textColor="@color/colorBackground"
                 android:textSize="18sp" />
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/InstancePriceRangeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"></LinearLayout>
 
         <TextView
             android:id="@+id/textFotografiiReq"
