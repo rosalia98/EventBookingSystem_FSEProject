@@ -74,23 +74,23 @@
             android:textColor="@color/colorText"
             android:textSize="18sp" />
 
-            <Button
-                android:id="@+id/button_cumpara_bilet"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_below="@+id/buttonLogin"
-                android:layout_alignParentStart="false"
-                android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="100dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_custom3"
-                android:backgroundTint="@color/colorAccent"
-                android:clickable="false"
-                android:fontFamily="@font/lato"
-                android:includeFontPadding="false"
-                android:text="Cumpara Bilet"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/button_detalii_bilete"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_below="@+id/buttonLogin"
+            android:layout_alignParentStart="false"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="100dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_custom3"
+            android:backgroundTint="@color/colorAccent"
+            android:clickable="false"
+            android:fontFamily="@font/lato"
+            android:includeFontPadding="false"
+            android:text="Bilete"
+            android:textColor="@color/colorBackgroundLighter"
+            android:textSize="18sp" />
+    </LinearLayout>
     </ScrollView>
 

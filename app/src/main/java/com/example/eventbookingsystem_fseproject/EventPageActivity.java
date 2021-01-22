@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,9 +22,14 @@ public class EventPageActivity extends AppCompatActivity implements View.OnClick
     //Variables
     StorageReference storageRef;
     FirebaseStorage storage;
+
+    // Informatiile despre evenimentul clickuit, transmise din adaptor:
+    String adapter_title, adapter_description, adapter_location, adapter_date, adapter_time, adapter_id;
+
     //UI
     private ImageView ep_poster;
     private String event_id;
+    private Button button_detalii_bilete;
 
 
     @Override
@@ -36,13 +42,18 @@ public class EventPageActivity extends AppCompatActivity implements View.OnClick
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
 
+        button_detalii_bilete = findViewById(R.id.button_detalii_bilete);
+        button_detalii_bilete.setOnClickListener(this);
 
+
+        // sunt transmise din adapter informatiile fiecarui eveniment, ca sa nu astept sa le ia iar din BD, daca tot le-a luat in adapter
         Intent intent = getIntent();
-        String adapter_title = intent.getStringExtra("ev_title");
-        String adapter_description = intent.getStringExtra("ev_description");
-        String adapter_date = intent.getStringExtra("ev_date");
-        String adapter_time = intent.getStringExtra("ev_time");
-        String adapter_id = intent.getStringExtra("ev_id");
+        adapter_title = intent.getStringExtra("ev_title");
+        adapter_description = intent.getStringExtra("ev_description");
+        adapter_location = intent.getStringExtra("ev_location");
+        adapter_date = intent.getStringExtra("ev_date");
+        adapter_time = intent.getStringExtra("ev_time");
+        adapter_id = intent.getStringExtra("ev_id");
 
 
         TextView ep_title = findViewById(R.id.ep_title);
@@ -78,7 +89,16 @@ public class EventPageActivity extends AppCompatActivity implements View.OnClick
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.button_detalii_bilete:
+                Intent intent = new Intent(this, BuyTicketActivity.class);
+                // transmit locatia pentru a putea accesa harta cu locuri corespunzatoare locatiei din DB
+                intent.putExtra("ev_location", adapter_location);
+                startActivity(intent);
+                break;
+        }
 
     }
 }

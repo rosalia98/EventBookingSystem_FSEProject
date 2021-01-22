@@ -37,12 +37,21 @@
 
         <activity android:name=".MainActivity" />
 
+
         <activity
             android:name=".EventPageActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".BuyTicketActivity"
+            android:parentActivityName=".EventPageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EventPageActivity" />
         </activity>
 
         <meta-data

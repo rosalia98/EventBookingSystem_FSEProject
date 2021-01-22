@@ -10,6 +10,8 @@ public class PriceCategory {
     private double price_per_seat;
     private ArrayList<Seat> lSeats_in_category;
 
+    private int seats_in_category;
+
 
     public PriceCategory() {
     }
@@ -30,14 +32,32 @@ public class PriceCategory {
             for (seat_count = 1; seat_count <= this.seats_per_row; seat_count++) {
 
                 String seat_id = cat_name + "_row" + row_count + "_seat" + seat_count;
-                Seat s = new Seat(seat_id, cat_name, row_count, seat_count, price_per_seat, false);
+                Seat s = new Seat(seat_id, cat_name, row_count, seat_count, price_per_seat, true);
 
                 lSeats_in_category.add(s);
 
             }
         }
 
+        seats_in_category = lSeats_in_category.size();
 
+
+    }
+
+    public ArrayList<Seat> getlSeats_in_category() {
+        return lSeats_in_category;
+    }
+
+    public void setlSeats_in_category(ArrayList<Seat> lSeats_in_category) {
+        this.lSeats_in_category = lSeats_in_category;
+    }
+
+    public int getSeats_in_category() {
+        return seats_in_category;
+    }
+
+    public void setSeats_in_category(int seats_in_category) {
+        this.seats_in_category = seats_in_category;
     }
 
     public String getCat_name() {

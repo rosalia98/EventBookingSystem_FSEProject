@@ -314,6 +314,12 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             ok = false;
         }
 
+        if (lEventPriceCategories.size() == 0) {
+            Toast toast = Toast.makeText(getContext(), "Adaugă categorii de pret!", Toast.LENGTH_SHORT);
+            toast.show();
+            ok = false;
+        }
+
         if (ok) {
 
             Event e1 = new Event(ev_titlu, ev_categorie, ev_descriere, ev_locatie, ev_an, ev_luna, ev_zi, ev_ora,

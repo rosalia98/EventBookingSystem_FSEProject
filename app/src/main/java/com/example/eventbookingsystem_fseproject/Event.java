@@ -25,7 +25,7 @@ public class Event {
     //private ArrayList<Seat> lSeat;
     private ArrayList<PriceCategory> lPriceCategories;
 
-    private int total_seats;
+    private int total_seats = 0;
     private int available_seats;
     private Calendar cal;
 
@@ -59,6 +59,7 @@ public class Event {
         this.minute = minute;
         this.lPriceCategories = priceCategories;
 
+
         this.cal = new GregorianCalendar(year, month, day, hourOfDay, minute);
         this.cal.setTimeZone(TimeZone.getTimeZone("Romania"));
 
@@ -68,7 +69,11 @@ public class Event {
 
 
         this.location = new GeoPoint(latitude, longitude);
-        lPriceCategories = new ArrayList<PriceCategory>();
+
+        for (PriceCategory pcat : this.lPriceCategories) {
+            this.total_seats += pcat.getSeats_in_category();
+
+        }
     }
 
 

@@ -120,13 +120,14 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
         holder.eventListLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("DEBUG ADAPTER..............S-a DAT  CLICK PE" + holder.tv_titlu.getText().toString() + "  !!!!!!!!!!!!1");
+                //System.out.println("DEBUG ADAPTER..............S-a DAT  CLICK PE" + holder.tv_titlu.getText().toString() + "  !!!!!!!!!!!!1");
 
                 Intent intent = new Intent(view.getContext(), EventPageActivity.class);
                 intent.putExtra("ev_title", holder.tv_titlu.getText().toString());
                 intent.putExtra("ev_description", holder.tv_descriere.getText().toString());
                 intent.putExtra("ev_date", holder.tv_date.getText().toString());
                 intent.putExtra("ev_time", holder.tv_time.getText().toString());
+                intent.putExtra("ev_location", holder.tv_locatie.getText().toString());
                 intent.putExtra("ev_id", holder.tv_eventId.getText().toString());
 
 
