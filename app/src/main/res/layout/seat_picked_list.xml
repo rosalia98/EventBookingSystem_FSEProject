@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/SeatCategoryListLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="2dp"
+    android:background="@drawable/button_custom4"
+    android:paddingHorizontal="5dp"
+    android:paddingVertical="5dp">
+
+    <TextView
+        android:id="@+id/seatNumeCategorie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/lato_bold"
+        android:foregroundGravity="clip_horizontal"
+        android:text="Categoria X"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16dp" />
+
+    <Spinner
+        android:id="@+id/seatSpinnerRowNr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_weight="1"
+        android:foregroundGravity="center_horizontal"
+        android:gravity="center_horizontal" />
+
+    <Spinner
+        android:id="@+id/seatSpinnerSeatNr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_weight="1.5"
+        android:foregroundGravity="right"
+        android:gravity="right" />
+
+    <TextView
+        android:id="@+id/seatPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/lato_bold"
+        android:foregroundGravity="right"
+        android:gravity="right"
+        android:text="X lei/loc"
+        android:textColor="@color/colorAccent"
+        android:textSize="16dp" />
+</LinearLayout>
